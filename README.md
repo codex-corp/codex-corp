@@ -117,6 +117,18 @@ A few posts where I document the engineering decisions, experiments, and systems
 
 [**View all posts on LinkedIn →**](https://www.linkedin.com/in/hanyalsamman/recent-activity/all/)
 
+## 📱 AOSB / ProBAM — Android Firmware & Open Source
+
+**Founder & Lead Developer · Android Open Source Project · 2013–2015**
+
+AOSB, originally known as **ProBAM**, was one of the projects that shaped me most as an engineer. It was a custom Android firmware project built across the Android/CyanogenMod ecosystem — not a single application. My work reached into the Android framework, ROM customization, OTA/update code, build and release tooling, and multi-device support across the project's open-source codebase.
+
+That experience taught me how to work inside a large upstream platform, understand software below the application layer, handle compatibility across different devices, and build with an active user and contributor community around the project.
+
+The project was publicly distributed through SourceForge, and its community support campaign recorded **$1,960 raised from 75 contributions**.
+
+**Explore the history:** [GitHub Organization](https://github.com/AOSB) · [SourceForge Archive](https://sourceforge.net/projects/probam/) · [Archived ProBAM.net](https://web.archive.org/web/20160125091135/http://probam.net/) · [Community Support Campaign](https://fundrazr.com/8fKfe?ref=ab_40dxRhvUKnz40dxRhvUKnz)
+
 ## Engineering Experience
 
 | Area | Experience |
