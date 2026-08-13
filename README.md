@@ -2,7 +2,7 @@
 
 📍 **United Arab Emirates** · 🧭 **Technical Lead @ WA.Technology** · 🧠 **AI Platforms & High-Scale Backend Engineering**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Hany%20Alsamman-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hanyalsamman/) [![Website](https://img.shields.io/badge/Website-codexc.com-111111?style=flat-square&logo=googlechrome&logoColor=white)](https://www.codexc.com) [![Email](https://img.shields.io/badge/Email-hany.alsamman%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:hany.alsamman@gmail.com) [![Calendly](https://img.shields.io/badge/Calendly-30%20min-006BFF?style=flat-square&logo=calendly&logoColor=white)](https://calendly.com/hany-alsamman/30min)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Hany%20Alsamman-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hanyalsamman/) [![Linktree](https://img.shields.io/badge/Linktree-hany.alsamman-43E55E?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/hany.alsamman) [![Website](https://img.shields.io/badge/Website-codexc.com-111111?style=flat-square&logo=googlechrome&logoColor=white)](https://www.codexc.com) [![Email](https://img.shields.io/badge/Email-hany.alsamman%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:hany.alsamman@gmail.com) [![Calendly](https://img.shields.io/badge/Calendly-30%20min-006BFF?style=flat-square&logo=calendly&logoColor=white)](https://calendly.com/hany-alsamman/30min)
 
 ![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
 ![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
@@ -70,6 +70,51 @@ I use open-source contributions as a way to work across unfamiliar codebases, la
 
 These contributions complement my main project work by exposing me to different conventions, runtime models, review processes, and ecosystems.
 
+## Selected Writing & LinkedIn Posts
+
+A few posts where I document the engineering decisions, experiments, and systems behind the work — not just the finished result.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/pulse/building-labeeb-story-human-vision-ai-powered-hany-alsamman-xx70f">
+<img src="https://media.licdn.com/dms/image/v2/D4D12AQGm15uBhYIrWQ/article-cover_image-shrink_720_1280/B4DZjFJtM9G8AM-/0/1755654327666?e=2147483647&v=beta&t=Ctws2lqA2J3eg2MTc6l4RGtgTXHaNXIXnAibzhSGF54" alt="Building Labeeb" width="100%" />
+</a>
+<br />
+<strong>Building Labeeb: A Story of Human Vision and AI-Powered Development</strong><br />
+<sub>Product architecture · AI-assisted engineering · verification systems</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/pulse/rag-powered-php-development-hany-alsamman-wcrsf">
+<img src="https://media.licdn.com/dms/image/v2/D5612AQFAaFHusZH3NA/article-cover_image-shrink_720_1280/B56ZiuQuRrH0AQ-/0/1755270294983?e=2147483647&v=beta&t=Iz096--VNutAIPgQbWSX79VpyodUoA_2hE7XY-MiH_A" alt="RAG-Powered PHP Development" width="100%" />
+</a>
+<br />
+<strong>RAG-Powered PHP Development</strong><br />
+<sub>PHP · RAG · developer workflows · AI-assisted software engineering</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/posts/hanyalsamman_you-realize-your-gpu-is-actually-a-super-npu-activity-7428717214427561984-5VGc">
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQHg7eJLSp1pcA/feedshare-shrink_800/B4DZxYzZ7MHkAg-/0/1771016396729?e=2147483647&v=beta&t=H1zTa3hdAdeklMW838BRko5E557UpYGW_jP-0NoUQl0" alt="Intel Arc local LLM post" width="100%" />
+</a>
+<br />
+<strong>Turning Intel Arc into a Local LLM Runtime</strong><br />
+<sub>OpenVINO · Intel Arc · OVMS · local inference · developer tooling</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/posts/hanyalsamman_github-activity-7427683411399655425-3vWS">
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQF9GAT99MVTEw/feedshare-shrink_2048_1536/B4DZxOjJRTG4Ak-/0/1770844362016?e=2147483647&v=beta&t=y-qZsRSuxI1O1LZaHPhO3DSIbTwziK6PXaTl0S1XHR4" alt="AI workflow observability post" width="100%" />
+</a>
+<br />
+<strong>Making AI Engineering Workflows Observable</strong><br />
+<sub>Agentic workflows · review loops · developer experience · engineering quality</sub>
+</td>
+</tr>
+</table>
+
+[**View all posts on LinkedIn →**](https://www.linkedin.com/in/hanyalsamman/recent-activity/all/)
+
 ## Engineering Experience
 
 | Area | Experience |
@@ -106,6 +151,7 @@ My GitHub history goes back to 2011, so the profile also includes older projects
 ## Connect
 
 - **LinkedIn:** [linkedin.com/in/hanyalsamman](https://www.linkedin.com/in/hanyalsamman/)
+- **Linktree:** [linktr.ee/hany.alsamman](https://linktr.ee/hany.alsamman)
 - **Website:** [codexc.com](https://www.codexc.com)
 - **Email:** [hany.alsamman@gmail.com](mailto:hany.alsamman@gmail.com)
 - **Calendly:** [30-minute meeting](https://calendly.com/hany-alsamman/30min)
