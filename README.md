@@ -1,73 +1,171 @@
 # Hany Alsamman
 
-📍 **United Arab Emirates** | 🤖 **Team Lead @ WA.Technology** | 🚀 **Full-stack Dev & AI**
+📍 **United Arab Emirates** · 🧭 **Technical Lead @ WA.Technology** · 🧠 **AI Platforms & High-Scale Backend Engineering**
 
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Hany%20Alsamman-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hanyalsamman/) [![Linktree](https://img.shields.io/badge/Linktree-hany.alsamman-43E55E?style=flat-square&logo=linktree&logoColor=white)](https://linktr.ee/hany.alsamman) [![Website](https://img.shields.io/badge/Website-codexc.com-111111?style=flat-square&logo=googlechrome&logoColor=white)](https://www.codexc.com) [![Email](https://img.shields.io/badge/Email-hany.alsamman%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:hany.alsamman@gmail.com) [![Calendly](https://img.shields.io/badge/Calendly-30%20min-006BFF?style=flat-square&logo=calendly&logoColor=white)](https://calendly.com/hany-alsamman/30min)
 
-[![Email](https://img.shields.io/badge/Email-hany.alsamman%40gmail.com-D14836?style=flat-square&logo=gmail&logoColor=white)](mailto:hany.alsamman@gmail.com) [![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/hanyalsamman/) [![Google+](https://img.shields.io/badge/-Google%2B-DA1C5C?style=flat-square&logo=google&logoColor=white)](http://google.com/+hanyalsamman) [![Portfolio](https://img.shields.io/badge/-Portfolio-2E7D32?style=flat-square&logo=google-drive&logoColor=white)](https://drive.google.com/file/d/1q37w8m2m_byTWzwzsErSz7qYOBUvssg1) [![Calendly](https://img.shields.io/badge/-Calendly-00A3FF?style=flat-square&logo=calendly&logoColor=white)](https://calendly.com/hany-alsamman/30min)
+![PHP](https://img.shields.io/badge/PHP-777BB4?style=flat-square&logo=php&logoColor=white)
+![Laravel](https://img.shields.io/badge/Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![AWS](https://img.shields.io/badge/AWS-232F3E?style=flat-square&logo=amazonaws&logoColor=white)
 
+> I build production software where **AI, backend architecture, data pipelines, and developer tooling** meet. My background spans long-running PHP platforms, distributed/event-driven systems, streaming infrastructure, and modern agentic/LLM workflows.
 
-![PHP](https://img.shields.io/badge/-PHP-777BB4?style=flat-square&logo=php&logoColor=white)
-![TypeScript](https://img.shields.io/badge/-TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
-![JavaScript](https://img.shields.io/badge/-JavaScript-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)
-![Python](https://img.shields.io/badge/-Python-3776AB?style=flat-square&logo=python&logoColor=white)
-![Laravel](https://img.shields.io/badge/-Laravel-FF2D20?style=flat-square&logo=laravel&logoColor=white)
-![Docker](https://img.shields.io/badge/-Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
-![AWS](https://img.shields.io/badge/-AWS-FF9900?style=flat-square&logo=amazon-aws&logoColor=white)
-![PostgreSQL](https://img.shields.io/badge/-PostgreSQL-336791?style=flat-square&logo=postgresql&logoColor=white)
+## What I Build
 
-> Building AI-powered platforms and exploring agentic engineering at high speed. Passionate about fact-checking, verification systems, and intelligent document processing.
+I focus on systems that need to be **reliable under load, maintainable by teams, and practical to operate in production**.
 
-## Current Projects
+- **AI platforms & agentic systems** — orchestration, model routing, RAG/evidence workflows, local inference, and AI-assisted developer tooling.
+- **Backend & distributed systems** — Laravel/PHP, Node.js/TypeScript, Python services, queues, Kafka, caching, and high-throughput event pipelines.
+- **Search, verification & data systems** — hybrid retrieval, claim/evidence workflows, PostgreSQL, OpenSearch, embeddings, and ingestion pipelines.
+- **Infrastructure & delivery** — Docker, Cloudflare, AWS, CI/CD, observability, deployment safety, and production troubleshooting.
 
-- 🧠 **[Labeeb](https://github.com/codex-corp/labeeb)** - AI-powered fact-checking and claim verification platform
-- ⚡ **[intel-arc-ovms-interface](https://github.com/codex-corp/intel-arc-ovms-interface)** - Native Windows 11 unified installer for running INT4 LLMs on Intel Arc GPUs via OpenVINO Model Server (PowerShell)
-- 📝 **[PromptVerse](https://github.com/codex-corp/PromptVerse)** - Centralized tool for managing AI prompts (TypeScript)
-- 🔄 **[codex-corp](https://github.com/codex-corp/codex-corp)** - Main organization repository
+## Featured Projects
 
-### Legacy Work
+### 🧠 Labeeb — AI fact-checking & news intelligence for MENA
 
-- 🔐 **[ncryptd](https://github.com/codex-corp/ncryptd)** - PHP encoder/obfuscator for protecting PHP applications
-- 🗄️ **[dct](https://github.com/codex-corp/dct)** - [Description]
-- 📱 **[khasm](https://github.com/codex-corp/khasm)** - [Description]
-- 🎬 **[video-js-swf](https://github.com/codex-corp/video-js-swf)** - Custom Flash Player for VideoJS 5
-- 🎬 **[flashls](https://github.com/codex-corp/flashls)** - HLS plugin for Flash
-- 🎬 **[videojs-hls-levels](https://github.com/codex-corp/videojs-hls-levels)** - HLS Level selection button for VideoJS
-- 💬 **[SpecialChatAjax](https://github.com/codex-corp/SpecialChatAjax)** - Customizable web AJAX chat (PHP/JavaScript)
-- 💬 **[SpecialChat](https://github.com/codex-corp/SpecialChat)** - Customizable web chat (PHP/JavaScript)
-- 🔧 **[XAMPP_Development_Utils](https://github.com/codex-corp/XAMPP_Development_Utils)** - XAMPP Development Utils Cinnamon Applet
-- 🌐 **[goo.im](https://github.com/codex-corp/goo.im)** - Goo.im API for integration
-- 📡 **[facebook-notify](https://github.com/codex-corp/facebook-notify)** - Facebook status notifier for GNOME and Cinnamon
-- 🤖 **[vBulletin-phpbot](https://github.com/codex-corp/vBulletin-phpbot)** - vBulletin bot (JavaScript)
-- 🛡️ **[SecurityClass](https://github.com/codex-corp/SecurityClass)** - Simple PHP Security Class
-- 📦 **[async-job-processing-with-batch-queuing](https://github.com/codex-corp/async-job-processing-with-batch-queuing)** - Async job processing with batch queuing
+**Founder / Technical Lead** · AI-powered fact-checking · News analysis · Arabic & English
 
+Labeeb helps people and organizations **understand news and online information more clearly, distinguish reliable information from misleading content, and move from claims to source-backed evidence**.
+
+Built around the realities of Arabic and English media, Labeeb combines fact-checking and news intelligence with an evidence-first approach designed to make analysis easier to understand and trust. The goal is not simply to label information, but to give users clearer context around what is being reported, what can be verified, and what evidence supports the conclusion.
+
+**Explore Labeeb:** [Website](https://www.labeeb.io) · [About](https://labeeb.io/about-us) · [How Labeeb Works](https://www.linkedin.com/posts/labeeb-mena_how-labeeb-works-activity-7398151644133097473-uCat) · [AI Ethics & Transparency](https://labeeb.io/ai-ethics-transparency) · [LinkedIn](https://www.linkedin.com/company/labeeb-mena/) · [Building Labeeb](https://www.linkedin.com/pulse/building-labeeb-story-human-vision-ai-powered-hany-alsamman-xx70f)
+
+> Core development is maintained privately under the `labeeb-io` organization.
+
+### ⚡ [Intel Arc AI Server / OVMS Interface](https://github.com/codex-corp/intel-arc-ovms-interface)
+
+**PowerShell · OpenVINO · OpenVINO Model Server · Local LLM inference**
+
+A Windows 11 toolkit for running INT4 LLMs on Intel Arc GPUs through OpenVINO Model Server, including installation automation, model switching, diagnostics, performance profiles, and OpenAI-compatible integration for IDEs and coding agents.
+
+**What it demonstrates:** local AI infrastructure, GPU/runtime integration, automation, compatibility layers, and developer experience.
+
+### 🧭 [Bifrost Capability Plugin](https://github.com/codex-corp/bifrost-capability-plugin)
+
+**Go · Agent routing · Model gateways · CEL rules**
+
+A native Bifrost `PreRequestHook` that classifies agent work by role and capability, combines it with complexity routing, and selects model/fallback lanes dynamically.
+
+**What it demonstrates:** agent architecture, model routing, gateway internals, deterministic classification, deployment safety, and Go plugin integration.
+
+### 📝 [PromptVerse](https://github.com/codex-corp/PromptVerse)
+
+**TypeScript · Next.js · React · Cloudflare · SQLite/D1**
+
+An open-source workspace for discovering, organizing, transforming, and sharing AI prompts, with versioning, search, prompt transformation, PWA support, and local/cloud deployment paths.
+
+**What it demonstrates:** modern full-stack TypeScript, product UX, edge deployment, local-first workflows, and AI provider integration.
+
+## Open Source & Engineering Contributions
+
+I use open-source contributions as a way to work across unfamiliar codebases, languages, and architectural styles — not just as a contribution counter.
+
+- **[gemini-web2api](https://github.com/Sophomoresty/gemini-web2api)** — contributed merged features improving Gemini API interoperability and temporary-chat workflows in a JavaScript/OpenAI-compatible project.
+- **[delegate-skills](https://github.com/amElnagdy/delegate-skills)** — contributed a Bifrost delegation skill for planning, architecture advice, and independent code review workflows.
+- **[MoMoA-Researcher](https://github.com/retomeier/MoMoA-Researcher)** — explored/refactored authentication, LLM integration, and Firebase-related handling in a multi-agent research codebase.
+
+These contributions complement my main project work by exposing me to different conventions, runtime models, review processes, and ecosystems.
+
+## Selected Writing & LinkedIn Posts
+
+A few posts where I document the engineering decisions, experiments, and systems behind the work — not just the finished result.
+
+<table>
+<tr>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/pulse/building-labeeb-story-human-vision-ai-powered-hany-alsamman-xx70f">
+<img src="https://media.licdn.com/dms/image/v2/D4D12AQGm15uBhYIrWQ/article-cover_image-shrink_720_1280/B4DZjFJtM9G8AM-/0/1755654327666?e=2147483647&v=beta&t=Ctws2lqA2J3eg2MTc6l4RGtgTXHaNXIXnAibzhSGF54" alt="Building Labeeb" width="100%" />
+</a>
+<br />
+<strong>Building Labeeb: A Story of Human Vision and AI-Powered Development</strong><br />
+<sub>Product architecture · AI-assisted engineering · verification systems</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/pulse/rag-powered-php-development-hany-alsamman-wcrsf">
+<img src="https://media.licdn.com/dms/image/v2/D5612AQFAaFHusZH3NA/article-cover_image-shrink_720_1280/B56ZiuQuRrH0AQ-/0/1755270294983?e=2147483647&v=beta&t=Iz096--VNutAIPgQbWSX79VpyodUoA_2hE7XY-MiH_A" alt="RAG-Powered PHP Development" width="100%" />
+</a>
+<br />
+<strong>RAG-Powered PHP Development</strong><br />
+<sub>PHP · RAG · developer workflows · AI-assisted software engineering</sub>
+</td>
+</tr>
+<tr>
+<td width="50%" valign="top">
+<a href="https://www.linkedin.com/posts/hanyalsamman_you-realize-your-gpu-is-actually-a-super-npu-activity-7428717214427561984-5VGc">
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQHg7eJLSp1pcA/feedshare-shrink_800/B4DZxYzZ7MHkAg-/0/1771016396729?e=2147483647&v=beta&t=H1zTa3hdAdeklMW838BRko5E557UpYGW_jP-0NoUQl0" alt="Intel Arc local LLM post" width="100%" />
+</a>
+<br />
+<strong>Turning Intel Arc into a Local LLM Runtime</strong><br />
+<sub>OpenVINO · Intel Arc · OVMS · local inference · developer tooling</sub>
+</td>
+<td width="50%" valign="top">
+<a href="https://lnkd.in/p/d3ZpRsFj">
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQHzXokULW6iCA/feedshare-shrink_1280/B4DZ_7IM7_JsAM-/0/1786624659705?e=1788393600&v=beta&t=HQyUv9yyAfELwhidjxEZwDQW2g596IO4--75W6M9lpc" alt="Web Summit Lisbon 2026" width="100%" />
+</a>
+<br />
+<strong>Joining Web Summit Lisbon 2026</strong><br />
+<sub>Web Summit · Lisbon · developer community · AI & software engineering</sub>
+</td>
+</tr>
+</table>
+
+[**View all posts on LinkedIn →**](https://www.linkedin.com/in/hanyalsamman/recent-activity/all/)
+
+## 📱 AOSB / ProBAM — Android Firmware & Open Source
+
+**Founder & Lead Developer · Android Open Source Project · 2013–2015**
+
+AOSB, originally known as **ProBAM**, was one of the projects that shaped me most as an engineer. It was a custom Android firmware project built across the Android/CyanogenMod ecosystem — not a single application. My work reached into the Android framework, ROM customization, OTA/update code, build and release tooling, and multi-device support across the project's open-source codebase.
+
+That experience taught me how to work inside a large upstream platform, understand software below the application layer, handle compatibility across different devices, and build with an active user and contributor community around the project.
+
+The project was publicly distributed through SourceForge, and its community support campaign recorded **$1,960 raised from 75 contributions**.
+
+**Explore the history:** [GitHub Organization](https://github.com/AOSB) · [SourceForge Archive](https://sourceforge.net/projects/probam/) · [Archived ProBAM.net](https://web.archive.org/web/20160125091135/http://probam.net/) · [Community Support Campaign](https://fundrazr.com/8fKfe?ref=ab_40dxRhvUKnz40dxRhvUKnz)
+
+## Engineering Experience
+
+| Area | Experience |
+| --- | --- |
+| **Backend** | PHP, Laravel, Symfony, Node.js, REST/GraphQL APIs, service architecture |
+| **Frontend** | TypeScript, JavaScript, React, Next.js, HTML/CSS |
+| **AI / LLM** | RAG, hybrid retrieval, embeddings, reranking, agent workflows, model gateways, local inference |
+| **Data** | PostgreSQL, SQL, OpenSearch, SQLite/D1, caching, ingestion pipelines |
+| **Distributed systems** | Kafka, queues, batching, event-driven architecture, rate limiting, asynchronous processing |
+| **Infrastructure** | Docker, Cloudflare, AWS, Linux/WSL, CI/CD, observability, deployment workflows |
+| **Earlier specialization** | H.264/live streaming, Video.js, Flash/HLS integrations, media delivery tooling |
+
+## Selected Earlier Work
+
+My GitHub history goes back to 2011, so the profile also includes older projects that reflect the technologies and problems I worked on at the time.
+
+- 🔐 **[ncryptd](https://github.com/codex-corp/ncryptd)** — PHP application encoder/obfuscation tooling; one of my longer-running public PHP projects.
+- 🎬 **[video-js-swf](https://github.com/codex-corp/video-js-swf)** — custom Flash player integration for Video.js.
+- 🎬 **[flashls](https://github.com/codex-corp/flashls)** — HLS/Flash streaming work from an earlier stage of my media engineering career.
+- 🎬 **[videojs-hls-levels](https://github.com/codex-corp/videojs-hls-levels)** — HLS quality-level selection tooling for Video.js.
+- 📦 **[async-job-processing-with-batch-queuing](https://github.com/codex-corp/async-job-processing-with-batch-queuing)** — asynchronous job processing and batching concepts for high-throughput backend workloads.
+
+## How I Work
+
+- Prefer **clear architecture and operational simplicity** over unnecessary abstraction.
+- Design for **failure, rollback, observability, and maintainability**, not only the happy path.
+- Use AI aggressively as an engineering multiplier, while keeping **testing, review, and final technical judgment** in the software delivery loop.
+- Comfortable moving between **legacy systems and modern stacks** when the business requires both.
 
 ## GitHub Activity
 
 ![GitHub Contribution Graph](https://ghchart.rshah.org/codex-corp)
 
-## What I'm Doing
+## Connect
 
-- **Building intelligent verification systems** - AI-powered fact-checking and claim analysis
-- **Developing agentic workflows** - Automating complex document processing pipelines
-- **Full-stack development** - Laravel, Next.js, Python, and modern AI tooling
-- **Consulting & verification services** - Fintech, streaming, DevOps, and infrastructure tooling for high-scale AI teams
-
-## Latest LinkedIn Posts
-
-Latest posts from [Hany A. - WA.Technology | LinkedIn](https://www.linkedin.com/in/hanyalsamman/):
-
-| Thumbnail | Post | Published |
-| --- | --- | --- |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D22AQF9xqiocIM3aA/feedshare-shrink_800/B4DZquDsD4KEAg-/0/1763856801468?e=2147483647&v=beta&t=v6DBTZvowSJfvBDYhMXq8esskvvJdg4TkS1ZTThYi8c) | [How Labeeb Works? — Labeeb](https://www.linkedin.com/posts/labeeb-mena_how-labeeb-works-activity-7398151644133097473-uCat) | 2025-11-23 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D12AQGm15uBhYIrWQ/article-cover_image-shrink_720_1280/B4DZjFJtM9G8AM-/0/1755654327666?e=2147483647&v=beta&t=Ctws2lqA2J3eg2MTc6l4RGtgTXHaNXIXnAibzhSGF54) | [Building Labeeb: A Story of Human Vision and AI-Powered Development](https://www.linkedin.com/pulse/building-labeeb-story-human-vision-ai-powered-hany-alsamman-xx70f) | 2025-08-20 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D5612AQFAaFHusZH3NA/article-cover_image-shrink_720_1280/B56ZiuQuRrH0AQ-/0/1755270294983?e=2147483647&v=beta&t=Iz096--VNutAIPgQbWSX79VpyodUoA_2hE7XY-MiH_A) | [RAG-Powered PHP Development](https://www.linkedin.com/pulse/rag-powered-php-development-hany-alsamman-wcrsf) | 2025-08-07 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D12AQF9HI_m-2xsaw/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1731882262951?e=2147483647&v=beta&t=BDNQz-1O0GQ1O8F-YM6oyldiu4l_ogMTd7iboKU9wps) | [Getting to Know Hany, According to ChatGPT](https://www.linkedin.com/pulse/getting-know-hany-according-chatgpt-hany-alsamman-d9nsf) | 2024-11-18 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D12AQHtSPRKua-9wA/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1727299820207?e=2147483647&v=beta&t=1M-p7a_wNb2vEQUfP6LUpR3pyZk86TH8bK8aN9T_K-g) | [Getting Started with Symfony 🚀](https://www.linkedin.com/pulse/getting-started-symfony-hany-alsamman-gphuf) | 2024-09-26 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D12AQHzHknGSQ3Ayg/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1676812050187?e=2147483647&v=beta&t=hOo3UUcwNmQ5QvXwdYdqfDQMCSLuAfue7z3i4dfk7uE) | [Learning Go as a PHP Developer: What I've Discovered](https://www.linkedin.com/pulse/learning-go-php-developer-what-ive-discovered-hany-alsamman) | 2023-02-19 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D12AQE2q8oVj5Gd4Q/article-cover_image-shrink_720_1280/article-cover_image-shrink_720_1280/0/1675247166300?e=2147483647&v=beta&t=MZEGG3vTdye_YsHAkpge1B8sn73mGeiV7pov3dkQmiY) | [My First Experience with Ubuntu: A Journey through Linux](https://www.linkedin.com/pulse/my-first-experience-ubuntu-journey-through-linux-hany-alsamman-1f) | 2023-02-01 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D22AQHg7eJLSp1pcA/feedshare-shrink_800/B4DZxYzZ7MHkAg-/0/1771016396729?e=2147483647&v=beta&t=H1zTa3hdAdeklMW838BRko5E557UpYGW_jP-0NoUQl0) | [You realize your GPU is actually a "Super-NPU." 🤯  I just released a unified interface to run local LLMs on Intel Arc hardware using OpenVINO.  This project sets up OpenVINO Model Server (OVMS) to…](https://www.linkedin.com/posts/hanyalsamman_you-realize-your-gpu-is-actually-a-super-npu-activity-7428717214427561984-5VGc) | 2026-02-15 |
-| ![thumbnail](https://media.licdn.com/dms/image/v2/D4D22AQF9GAT99MVTEw/feedshare-shrink_2048_1536/B4DZxOjJRTG4Ak-/0/1770844362016?e=2147483647&v=beta&t=y-qZsRSuxI1O1LZaHPhO3DSIbTwziK6PXaTl0S1XHR4) | [Our AI workflow shouldn’t be a black box anymore; now you can see what happened, why it happened, and exactly how to improve Codex results.](https://www.linkedin.com/posts/hanyalsamman_github-activity-7427683411399655425-3vWS) | 2026-02-12 |
-
-[View all posts on LinkedIn](https://www.linkedin.com/in/hanyalsamman/)
+- **LinkedIn:** [linkedin.com/in/hanyalsamman](https://www.linkedin.com/in/hanyalsamman/)
+- **Linktree:** [linktr.ee/hany.alsamman](https://linktr.ee/hany.alsamman)
+- **Website:** [codexc.com](https://www.codexc.com)
+- **Email:** [hany.alsamman@gmail.com](mailto:hany.alsamman@gmail.com)
+- **Calendly:** [30-minute meeting](https://calendly.com/hany-alsamman/30min)
