@@ -105,12 +105,12 @@ A few posts where I document the engineering decisions, experiments, and systems
 <sub>OpenVINO · Intel Arc · OVMS · local inference · developer tooling</sub>
 </td>
 <td width="50%" valign="top">
-<a href="https://www.linkedin.com/posts/hanyalsamman_github-activity-7427683411399655425-3vWS">
-<img src="https://media.licdn.com/dms/image/v2/D4D22AQF9GAT99MVTEw/feedshare-shrink_2048_1536/B4DZxOjJRTG4Ak-/0/1770844362016?e=2147483647&v=beta&t=y-qZsRSuxI1O1LZaHPhO3DSIbTwziK6PXaTl0S1XHR4" alt="AI workflow observability post" width="100%" />
+<a href="https://lnkd.in/p/d3ZpRsFj">
+<img src="https://media.licdn.com/dms/image/v2/D4D22AQHzXokULW6iCA/feedshare-shrink_1280/B4DZ_7IM7_JsAM-/0/1786624659705?e=1788393600&v=beta&t=HQyUv9yyAfELwhidjxEZwDQW2g596IO4--75W6M9lpc" alt="Web Summit Lisbon 2026" width="100%" />
 </a>
 <br />
-<strong>Making AI Engineering Workflows Observable</strong><br />
-<sub>Agentic workflows · review loops · developer experience · engineering quality</sub>
+<strong>Joining Web Summit Lisbon 2026</strong><br />
+<sub>Web Summit · Lisbon · developer community · AI & software engineering</sub>
 </td>
 </tr>
 </table>
