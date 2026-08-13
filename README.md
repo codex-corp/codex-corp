@@ -26,15 +26,17 @@ I focus on systems that need to be **reliable under load, maintainable by teams,
 
 ## Featured Projects
 
-### 🧠 Labeeb — AI-powered fact-checking & evidence verification
+### 🧠 Labeeb — AI fact-checking & news intelligence for MENA
 
-**Founder / Technical Lead** · Laravel · Next.js · Python · PostgreSQL · OpenSearch · AI/LLM infrastructure
+**Founder / Technical Lead** · AI-powered fact-checking · News analysis · Arabic & English
 
-Labeeb is an AI-driven verification platform focused on Arabic/MENA content. It combines ingestion, search, evidence retrieval, claim analysis, and agentic workflows to help make verification more structured and explainable.
+Labeeb helps people and organizations **understand news and online information more clearly, distinguish reliable information from misleading content, and move from claims to source-backed evidence**.
 
-**What it demonstrates:** product architecture, AI orchestration, hybrid search/RAG, multilingual processing, backend design, and operating a multi-service platform.
+Built around the realities of Arabic and English media, Labeeb combines fact-checking and news intelligence with an evidence-first approach designed to make analysis easier to understand and trust. The goal is not simply to label information, but to give users clearer context around what is being reported, what can be verified, and what evidence supports the conclusion.
 
-> Core development is maintained in a private repository under the `labeeb-io` organization.
+**Explore Labeeb:** [Website](https://www.labeeb.io) · [About](https://labeeb.io/about-us) · [How Labeeb Works](https://www.linkedin.com/posts/labeeb-mena_how-labeeb-works-activity-7398151644133097473-uCat) · [AI Ethics & Transparency](https://labeeb.io/ai-ethics-transparency) · [LinkedIn](https://www.linkedin.com/company/labeeb-mena/) · [Building Labeeb](https://www.linkedin.com/pulse/building-labeeb-story-human-vision-ai-powered-hany-alsamman-xx70f)
+
+> Core development is maintained privately under the `labeeb-io` organization.
 
 ### ⚡ [Intel Arc AI Server / OVMS Interface](https://github.com/codex-corp/intel-arc-ovms-interface)
 
@@ -64,7 +66,7 @@ An open-source workspace for discovering, organizing, transforming, and sharing 
 
 I use open-source contributions as a way to work across unfamiliar codebases, languages, and architectural styles — not just as a contribution counter.
 
-- **[gemini-web2api](https://github.com/Sophomoresty/gemini-web2api)** — contributed merged features around temporary chats and Gemini session/cookie synchronization in a JavaScript/OpenAI-compatible API project.
+- **[gemini-web2api](https://github.com/Sophomoresty/gemini-web2api)** — contributed merged features improving Gemini API interoperability and temporary-chat workflows in a JavaScript/OpenAI-compatible project.
 - **[delegate-skills](https://github.com/amElnagdy/delegate-skills)** — contributed a Bifrost delegation skill for planning, architecture advice, and independent code review workflows.
 - **[MoMoA-Researcher](https://github.com/retomeier/MoMoA-Researcher)** — explored/refactored authentication, LLM integration, and Firebase-related handling in a multi-agent research codebase.
 
