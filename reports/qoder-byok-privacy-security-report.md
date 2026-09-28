@@ -1,6 +1,6 @@
 # Independent Privacy & Network Analysis of Qoder BYOK / Custom Models
 
-> **Status:** Independent user-led forensic analysis  
+> **Status:** Independent user-led forensic analysis; updated after a synchronized live-trace test  
 > **Test date:** 2026-09-28  
 > **Scope:** Qoder Desktop on Windows using a custom OpenAI-compatible model endpoint  
 > **Focus:** Network behavior, telemetry, local storage, BYOK routing, and practical privacy hardening
@@ -141,13 +141,52 @@ Static inspection of the distributed runtime bundle showed an event structure co
 
 A runtime event in the test contained a human-readable task name that was derived from the user's prompt.
 
-The exact prompt-derived value is intentionally omitted from this public report.
+A controlled benign test made this behavior directly observable. A prompt beginning with:
+
+```text
+explain how ...
+```
+
+produced an outbound business-reporting field:
+
+```json
+"name": "explain ho"
+```
+
+The same prefix-style behavior was observed in more than one turn. Machine identifiers, session identifiers, and private prompt text are intentionally omitted from this public report.
 
 ### Privacy implication
 
 This demonstrates that "telemetry" was not limited to anonymous counters such as latency or success/failure. At least one reporting path included human-readable text derived from user input.
 
 This still does **not** establish that the full prompt was sent in this event.
+
+### Controlled live-trace confirmation
+
+A synchronized trace correlated one benign prompt with Qoder's local inference and cloud reporting paths.
+
+Observed sequence:
+
+```text
+User submits prompt
+        |
+        v
+Qoder -> localhost:<LOCAL_PORT>/v1/chat/completions
+        |
+        | 200 OK / streamed model response
+        v
+Turn completes
+        |
+        +-> api2.qoder.sh
+        |    businessFinish.report
+        |    includes prompt-derived "name" prefix
+        |
+        +-> center.qoder.sh
+             backFlowAgentQueryFinish.report
+             session/turn operational metadata
+```
+
+The local inference request and the two cloud reporting operations had separate operation names and destinations. No duplicate hosted-model inference request was observed during this trace.
 
 ---
 
@@ -190,6 +229,8 @@ ai-code-tracking-session-end
 
 These strings prove the presence of session/context instrumentation.
 
+During the synchronized trace, `backFlowAgentQueryFinish.report` was observed immediately after the turn and contained operational fields such as session/task identifiers, duration, loop count, and terminal state. In the inspected payload, raw prompt text and source code were not present.
+
 They do **not**, by themselves, prove that every associated field or file name was transmitted to a remote server.
 
 ---
@@ -203,6 +244,8 @@ https://api2.qoder.sh/otel/v1/logs
 ```
 
 This is separate from the custom-model inference path.
+
+The synchronized single-turn trace did not observe a distinct OpenTelemetry POST burst tied to that exact turn. Because the remote payload is TLS-protected, this test cannot prove that OpenTelemetry never contains additional user- or project-derived fields.
 
 ---
 
@@ -260,10 +303,21 @@ This behavior is consistent with Qoder's public documentation, which says that a
 
 A narrower firewall experiment blocked the then-current network addresses used by `api2.qoder.sh` while leaving the rest of Qoder's control plane available.
 
+The addresses blocked in this point-in-time test were:
+
+```text
+8.223.13.163
+47.57.188.188
+```
+
 Result:
 
 - custom model remained visible
 - local custom-model inference continued working
+- the controlled inference request still reached the local OpenAI-compatible endpoint successfully
+- `businessFinish.report` attempted to use `api2.qoder.sh` and failed while the block was active
+- a periodic model-catalog refresh to `api2.qoder.sh` also failed
+- no fallback hosted-model inference request was observed
 
 This strongly suggests that the tested custom inference path did not require Qoder's hosted `api2` inference/telemetry endpoint.
 
@@ -274,6 +328,8 @@ This is **not a durable firewall strategy** by itself.
 Qoder uses HTTPDNS and cloud infrastructure whose addresses can change. IP-specific blocking can therefore fail open after endpoint rotation or failover.
 
 A domain/SNI/application-aware egress policy or controlled proxy is preferable for long-term enforcement.
+
+Broad blocking of entire cloud-provider address ranges is **not** recommended from this test alone: those ranges may host unrelated services and are wider than the evidence supports.
 
 ---
 
@@ -286,6 +342,9 @@ A domain/SNI/application-aware egress policy or controlled proxy is preferable f
 - Qoder initialized a remote OpenTelemetry endpoint.
 - AI-turn and session reporting operations were present.
 - A prompt-derived human-readable task name appeared in an outbound business-reporting event.
+- A synchronized trace confirmed that this prompt-derived prefix was generated after the local model turn and sent through `businessFinish.report`.
+- The same synchronized trace observed separate turn-completion metadata sent through `backFlowAgentQueryFinish.report`.
+- No duplicate Qoder-hosted model inference request was observed during the controlled trace.
 - Qoder stored extensive session/tool/context information locally.
 - Full Internet blocking broke custom-model discovery/availability.
 - Narrow blocking of the observed `api2` addresses did not break local custom inference during the test.
@@ -293,6 +352,7 @@ A domain/SNI/application-aware egress policy or controlled proxy is preferable f
 ### Not confirmed
 
 - No evidence was found that the **complete custom-model prompt/context body** was duplicated to Qoder's hosted inference endpoint.
+- Because TLS-protected OpenTelemetry payloads were not decrypted, this test cannot prove that no additional prompt- or project-derived fields ever appear in those telemetry records.
 - The test did not prove that full source-file contents were uploaded through `ChatContextTelemetry`.
 - TLS-protected cloud payloads were not decrypted.
 - This report does not establish how every Qoder plan, platform, region, or future build behaves.
@@ -330,6 +390,8 @@ Model routing and IDE telemetry should be evaluated separately.
 
 For sensitive projects, the strongest practical control is network-layer enforcement.
 
+The experiments showed why an all-or-nothing block is not ideal: blocking all Internet access caused the custom-model entry to disappear, while narrower blocking of the observed `api2.qoder.sh` addresses preserved custom inference in the tested session.
+
 Prefer:
 
 ```text
@@ -341,6 +403,21 @@ MONITOR newly introduced endpoints after every Qoder update
 ```
 
 Avoid depending permanently on a static list of IP addresses.
+
+A sensible staged hardening workflow is:
+
+```text
+1. Keep loopback/local custom-model traffic allowed.
+2. Block or suppress optional telemetry paths where they can be isolated.
+3. Keep only the minimum account/control-plane access needed for the product to function.
+4. Re-test after a cold restart, not only in an already-authenticated session.
+5. Monitor HTTPDNS/failover behavior for replacement addresses.
+6. Verify that no hosted-model fallback occurs when telemetry/inference endpoints are blocked.
+```
+
+In the tested environment, blocking the observed `api2.qoder.sh` addresses was compatible with custom inference. Blocking all Qoder Internet access was not.
+
+The editor setting `telemetry.telemetryLevel: "off"` is also worth testing and verifying against runtime traffic. Treat the setting as effective only after confirming that the corresponding network events stop; this report has not yet established that it suppresses every Qoder-specific tracking path.
 
 ### 3. Treat `.qoderignore` as an indexing control, not a security boundary
 
@@ -394,7 +471,17 @@ MCP servers, computer-use helpers, search/indexing services, and plugins can cre
 
 A privacy review that looks only at the model endpoint is incomplete.
 
-### 7. Re-test after every substantial Qoder update
+### 7. Verify telemetry controls instead of assuming they cover product-specific tracking
+
+The tested build exposed a VS Code-style setting:
+
+```json
+"telemetry.telemetryLevel": "off"
+```
+
+Because Qoder also has product-specific operations such as `businessFinish.report` and `backFlowAgentQueryFinish.report`, disabling a generic editor telemetry setting should not be assumed to suppress all of them without a follow-up network trace.
+
+### 8. Re-test after every substantial Qoder update
 
 Endpoint behavior, telemetry fields, helper processes, and catalog dependencies can change.
 
@@ -505,7 +592,7 @@ The key takeaway is not that "Qoder uploads everything."
 
 The evidence supports a narrower conclusion:
 
-> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint, while Qoder still maintained independent telemetry/control-plane data flows, including at least one outbound AI-turn field derived from user prompt text.**
+> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint and no duplicate hosted-model inference was observed. Qoder nevertheless maintained independent telemetry/control-plane data flows, and a synchronized trace confirmed that at least one outbound AI-turn reporting field contained a prefix derived directly from user prompt text.**
 
 That distinction matters for developers evaluating whether a BYOK coding workflow meets their organization's privacy requirements.
 
