@@ -468,39 +468,43 @@ This second patch was therefore functionally validated in the tested build.
 
 ---
 
-## Finding 12 — Remaining telemetry/local-data surfaces
+## Finding 12 — Final hardened state after multi-run validation
 
-At the latest inspection point:
+After the final tracking patch, 16 fresh session runs were inspected. In those runs:
 
-| Path | Observed state | Privacy interpretation |
+| Path | Final observed state | Privacy interpretation |
 |---|---|---|
-| `businessFinish.report` | neutralized and validated absent | confirmed prompt-derived telemetry path removed |
-| `codeStatistics.track` | neutralized preventively and post-restart behavior remained functional | static code-statistics surface disabled in the tested runtime |
-| `backFlowAgentQueryFinish.report` | still active | operational + repository-identifying metadata, including `git_remote` |
-| `TraceTelemetryService / OTEL` | locally dropped/uncommitted with telemetry level off in the tested run | no remote OTEL burst observed in that run |
+| `businessFinish.report` | 0 observed | confirmed prompt-derived reporting path remained neutralized |
+| `codeStatistics.track` | 0 observed | preventive code-statistics sender remained neutralized |
+| `backFlowAgentQueryFinish.report` | 0 observed | turn-completion repository/session tracking no longer appeared |
+| `aiCodeTracking.report` | 0 observed | Git/diff tracking using the same tracking transport no longer appeared |
+| `/api/v1/tracking` | 0 observed | no successful calls seen in the inspected post-patch runs |
+| `TraceTelemetryService / OTEL` | locally dropped/uncommitted with telemetry level off in the tested runs | no remote OTEL burst observed in those runs |
 | `ChatContextTelemetry` | still logs context names locally | local storage exposure; cloud transmission not established |
 | Sentry / Crashpad | dormant during normal operation | crash-time privacy surface, not an active normal-turn channel |
 
+The final hardening used a defense-in-depth modification of both the high-level tracking dispatcher and the low-level `/api/v1/tracking` transport. This eliminated the observed turn/Git tracking traffic in the tested runs.
+
+Because the low-level transport is broader than a single event, this should be treated as a tested local hardening modification rather than a vendor-supported configuration guarantee. Features not exercised by the test suite could theoretically depend on the same transport.
+
 ---
 
-## Finding 13 — Turn-completion tracking still transmits repository-identifying metadata with telemetry set to off
+## Finding 13 — Turn-completion and Git tracking could be neutralized without breaking the tested BYOK workflow
 
-The strongest remaining active Qoder-specific tracking path observed after the two surgical patches was:
+Before the final patch, the strongest remaining active Qoder-specific tracking path was:
 
 ```text
 backFlowAgentQueryFinish.report
 -> https://center.qoder.sh/api/v1/tracking
 ```
 
-This path continued to operate even while:
+It operated even while:
 
 ```json
 "telemetry.telemetryLevel": "off"
 ```
 
-Static analysis and runtime evidence showed that this reporter uses Qoder's own internal telemetry configuration rather than relying solely on the editor's VS Code-style telemetry level.
-
-The observed envelope/data included fields such as:
+Its observed envelope/data included fields such as:
 
 ```text
 session_id
@@ -515,7 +519,14 @@ git_remote
 
 No raw source-code body or raw prompt body was observed in this event.
 
-The inclusion of `git_remote` means the event can reveal repository identity and, depending on the remote URL, organization/user naming information even when prompt text itself is absent.
+Static analysis identified:
+
+- a high-level dispatcher that builds the tracking envelope, including `git_remote`
+- a low-level transport that signs and posts records to `/api/v1/tracking`
+
+The final local hardening short-circuited both layers. Across 16 inspected post-restart runs, no `backFlowAgentQueryFinish.report`, `aiCodeTracking.report`, or `/api/v1/tracking` calls were observed.
+
+The tested workflow continued to support startup, model catalog resolution, custom inference, tools, hooks, subagents, and normal session lifecycle.
 
 ---
 
@@ -555,6 +566,27 @@ This also reinforces why blocking `/api/v2/model/list` is a poor long-term priva
 
 ---
 
+## Finding 16 — Selecting a Qoder cloud model still sends inference to Qoder's hosted endpoint
+
+The hardening described here targets telemetry/tracking. It does **not** force every model selection to use the local BYOK gateway.
+
+During validation, runs using Qoder-managed model selections such as `auto` / hosted model profiles used a hosted inference path under:
+
+```text
+api2.qoder.sh
+/algo/api/v2/service/pro/sse/agent_chat_generation
+```
+
+By contrast, the custom BYOK model continued to use:
+
+```text
+http://localhost:<LOCAL_PORT>/v1/chat/completions
+```
+
+Therefore, users who require prompts to avoid Qoder-hosted inference must explicitly keep the custom/BYOK model selected. The telemetry patches do not convert Qoder cloud models into local models.
+
+---
+
 ## What was confirmed vs. not confirmed
 
 ### Confirmed in the tested build
@@ -572,7 +604,10 @@ This also reinforces why blocking `/api/v2/model/list` is a poor long-term priva
 - Narrow blocking of the observed `api2` addresses initially left some local custom inference working, but later broke remote model-catalog/provider-policy resolution.
 - Restoring `api2` access and neutralizing only `businessFinish.report` preserved normal BYOK operation while removing the confirmed prompt-prefix reporting path.
 - A second preventive patch neutralizing `codeStatistics.track` was followed by successful custom inference, background-agent execution, and tool/hook execution in a fresh run.
-- `telemetry.telemetryLevel = "off"` did not stop `backFlowAgentQueryFinish.report` from sending product-specific tracking metadata, including `git_remote`, to `center.qoder.sh`.
+- Before the final tracking patch, `telemetry.telemetryLevel = "off"` did not stop `backFlowAgentQueryFinish.report` from sending product-specific tracking metadata, including `git_remote`, to `center.qoder.sh`.
+- After short-circuiting the high-level tracking dispatcher and low-level `/api/v1/tracking` transport, 16 inspected runs contained zero observed `businessFinish.report`, `codeStatistics.track`, `backFlowAgentQueryFinish.report`, `aiCodeTracking.report`, or `/api/v1/tracking` calls.
+- The hardened BYOK workflow continued to use the configured local custom endpoint successfully.
+- Selecting a Qoder-managed cloud model still sent inference to Qoder's hosted model endpoint; the hardening does not prevent this if the user chooses a cloud model.
 - A cold-start race was observed where a background task requested model policy before the remote model catalog had completed initialization; later requests succeeded once catalog state was available.
 
 ### Not confirmed
@@ -643,7 +678,7 @@ A sensible staged hardening workflow is:
 
 In the tested environment, **blocking `api2.qoder.sh` as a whole is not recommended for BYOK** because `/api/v2/model/list` is needed for model/provider-policy resolution.
 
-The better-tested approach was operation-level hardening: keep required catalog access, neutralize the specific `businessFinish.report` reporter, and verify behavior after a full restart.
+The better-tested approach was operation-level/runtime hardening: keep required catalog access, neutralize the specific `businessFinish.report` reporter, disable the optional code-statistics sender, and suppress the dedicated `/api/v1/tracking` pipeline while repeatedly verifying required features after restart.
 
 The editor setting `telemetry.telemetryLevel: "off"` was already enabled during later testing. It reduced/dropped some generic telemetry activity, but it did **not** stop Qoder-specific `backFlowAgentQueryFinish.report` tracking or prevent repository-identifying `git_remote` metadata from being sent through that path.
 
@@ -707,7 +742,7 @@ The tested build exposed a VS Code-style setting:
 "telemetry.telemetryLevel": "off"
 ```
 
-The later trace confirmed this warning: with `telemetry.telemetryLevel: "off"` already configured, `backFlowAgentQueryFinish.report` still ran and sent metadata to `center.qoder.sh`.
+The later trace confirmed this warning: with `telemetry.telemetryLevel: "off"` already configured, `backFlowAgentQueryFinish.report` still ran and sent metadata to `center.qoder.sh` until the tracking path itself was neutralized.
 
 Treat telemetry controls as effective only after validating the actual runtime operations and network destinations.
 
@@ -822,7 +857,7 @@ The key takeaway is not that "Qoder uploads everything."
 
 The evidence supports a narrower conclusion:
 
-> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint and no duplicate hosted-model inference was observed. Qoder nevertheless maintained independent telemetry/control-plane data flows. A synchronized trace confirmed that one outbound AI-turn report contained a prefix derived directly from user prompt text; that reporter was later isolated and successfully neutralized without breaking BYOK. A second code-statistics sender was also neutralized preventively and the runtime remained functional. Separate turn-completion tracking to Qoder's control plane remained active even with the editor telemetry level set to off and included repository-identifying metadata such as `git_remote`.**
+> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint and no duplicate hosted-model inference was observed. Qoder nevertheless maintained independent telemetry/control-plane data flows. A synchronized trace confirmed that one outbound AI-turn report contained a prefix derived directly from user prompt text. That reporter, the optional code-statistics sender, and the dedicated turn/Git tracking pipeline were subsequently neutralized locally; across 16 inspected post-patch runs those known tracking operations were absent while the BYOK workflow remained functional. Required account/catalog/control-plane traffic remained. Selecting a Qoder-hosted model still sends inference to Qoder's cloud, so privacy-sensitive use depends on keeping the custom model selected.**
 
 That distinction matters for developers evaluating whether a BYOK coding workflow meets their organization's privacy requirements.
 
