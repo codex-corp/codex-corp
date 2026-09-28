@@ -429,7 +429,7 @@ This matters because turning off editor telemetry does **not** by itself establi
 
 ---
 
-## Finding 11 — A separate code-statistics client exists; it was patched conservatively, but normal chat did not dynamically trigger it
+## Finding 11 — A separate code-statistics client exists; preventive neutralization was validated
 
 Static analysis found a dedicated client method:
 
@@ -439,13 +439,24 @@ codeStatistics.track
 
 posting to `center.qoder.sh/api/v1/tracking`.
 
-The method itself did not check `telemetry.telemetryLevel`. Static analysis associated the broader code-statistics/git-observation subsystem with metadata such as repository identity, line-count statistics, and Git-related information.
+The method itself did not check `telemetry.telemetryLevel`. Its request body is built from the supplied code-statistics object and the surrounding code-statistics/git-observation subsystem contains repository references and line-count/statistics data.
 
-However, an important distinction is required:
+An important distinction remains:
 
-> In the inspected normal chat run logs, `operation=codeStatistics.track` had not been observed firing.
+> In the inspected normal interactive chat runs, `operation=codeStatistics.track` had not been observed firing before the patch.
 
-A second minimal early-return patch was therefore applied as **preventive hardening**, not as remediation of a dynamically observed leak.
+The patch was therefore **preventive hardening**, not remediation of a dynamically observed normal-turn leak.
+
+The method was neutralized with the same minimal early-return pattern used for the first reporter. After a full restart and fresh run:
+
+```text
+custom inference                  works
+background agent turns            work
+tools/hooks                        work
+businessFinish.report              absent
+codeStatistics.track               absent
+hosted/shadow inference            not observed
+```
 
 The current patched runtime keeps separate rollback points for:
 
@@ -453,7 +464,7 @@ The current patched runtime keeps separate rollback points for:
 2. runtime after neutralizing `businessFinish.report`
 3. runtime after also neutralizing `codeStatistics.track`
 
-Full post-restart validation of this second patch should be completed before treating it as fully verified.
+This second patch was therefore functionally validated in the tested build.
 
 ---
 
@@ -464,11 +475,83 @@ At the latest inspection point:
 | Path | Observed state | Privacy interpretation |
 |---|---|---|
 | `businessFinish.report` | neutralized and validated absent | confirmed prompt-derived telemetry path removed |
-| `codeStatistics.track` | patched preventively; not previously seen in normal chat logs | static privacy surface; post-restart validation pending |
-| `backFlowAgentQueryFinish.report` | still active | operational + repository-identifying metadata |
+| `codeStatistics.track` | neutralized preventively and post-restart behavior remained functional | static code-statistics surface disabled in the tested runtime |
+| `backFlowAgentQueryFinish.report` | still active | operational + repository-identifying metadata, including `git_remote` |
 | `TraceTelemetryService / OTEL` | locally dropped/uncommitted with telemetry level off in the tested run | no remote OTEL burst observed in that run |
 | `ChatContextTelemetry` | still logs context names locally | local storage exposure; cloud transmission not established |
 | Sentry / Crashpad | dormant during normal operation | crash-time privacy surface, not an active normal-turn channel |
+
+---
+
+## Finding 13 — Turn-completion tracking still transmits repository-identifying metadata with telemetry set to off
+
+The strongest remaining active Qoder-specific tracking path observed after the two surgical patches was:
+
+```text
+backFlowAgentQueryFinish.report
+-> https://center.qoder.sh/api/v1/tracking
+```
+
+This path continued to operate even while:
+
+```json
+"telemetry.telemetryLevel": "off"
+```
+
+Static analysis and runtime evidence showed that this reporter uses Qoder's own internal telemetry configuration rather than relying solely on the editor's VS Code-style telemetry level.
+
+The observed envelope/data included fields such as:
+
+```text
+session_id
+task_id
+prompt_id
+duration_ms
+loop_iteration_count
+terminal_reason
+uid / oid / mid / aid
+git_remote
+```
+
+No raw source-code body or raw prompt body was observed in this event.
+
+The inclusion of `git_remote` means the event can reveal repository identity and, depending on the remote URL, organization/user naming information even when prompt text itself is absent.
+
+---
+
+## Finding 14 — Required account/control-plane traffic remains separate from telemetry hardening
+
+The tested build continued to make account/control-plane requests such as:
+
+```text
+GET openapi.qoder.sh/.../user/status
+GET center.qoder.sh/.../service/region/endpoints
+```
+
+These were associated with account/license state and endpoint election rather than model inference.
+
+This distinction is important for hardening: blocking `center.qoder.sh` or `openapi.qoder.sh` wholesale may break product initialization or account-dependent capabilities. Operation-level filtering or code-level neutralization is safer than broad endpoint blocking when required and optional functions share infrastructure.
+
+---
+
+## Finding 15 — A cold-start race can briefly break BYOK before model-catalog initialization completes
+
+During one cold-start run, an automated background recap/session task started within a few seconds of process launch, before the initial remote model-catalog fetch had completed.
+
+That produced a transient error equivalent to:
+
+```text
+outerProvider is required for external provider model
+```
+
+Once the model catalog finished loading, subsequent custom-model queries completed normally.
+
+This supports two conclusions:
+
+1. Qoder's BYOK runtime depends on model-catalog/provider metadata being available before some background tasks execute.
+2. A transient provider-policy error at startup is not necessarily an inference failure; it can be an initialization-order race.
+
+This also reinforces why blocking `/api/v2/model/list` is a poor long-term privacy strategy.
 
 ---
 
@@ -488,7 +571,9 @@ At the latest inspection point:
 - Full Internet blocking broke custom-model discovery/availability.
 - Narrow blocking of the observed `api2` addresses initially left some local custom inference working, but later broke remote model-catalog/provider-policy resolution.
 - Restoring `api2` access and neutralizing only `businessFinish.report` preserved normal BYOK operation while removing the confirmed prompt-prefix reporting path.
-- `telemetry.telemetryLevel = "off"` did not stop `backFlowAgentQueryFinish.report` from sending product-specific tracking metadata to `center.qoder.sh`.
+- A second preventive patch neutralizing `codeStatistics.track` was followed by successful custom inference, background-agent execution, and tool/hook execution in a fresh run.
+- `telemetry.telemetryLevel = "off"` did not stop `backFlowAgentQueryFinish.report` from sending product-specific tracking metadata, including `git_remote`, to `center.qoder.sh`.
+- A cold-start race was observed where a background task requested model policy before the remote model catalog had completed initialization; later requests succeeded once catalog state was available.
 
 ### Not confirmed
 
@@ -560,7 +645,7 @@ In the tested environment, **blocking `api2.qoder.sh` as a whole is not recommen
 
 The better-tested approach was operation-level hardening: keep required catalog access, neutralize the specific `businessFinish.report` reporter, and verify behavior after a full restart.
 
-The editor setting `telemetry.telemetryLevel: "off"` was already enabled during later testing. It reduced/dropped some generic telemetry activity, but it did **not** stop Qoder-specific `backFlowAgentQueryFinish.report` tracking.
+The editor setting `telemetry.telemetryLevel: "off"` was already enabled during later testing. It reduced/dropped some generic telemetry activity, but it did **not** stop Qoder-specific `backFlowAgentQueryFinish.report` tracking or prevent repository-identifying `git_remote` metadata from being sent through that path.
 
 ### 3. Treat `.qoderignore` as an indexing control, not a security boundary
 
@@ -737,7 +822,7 @@ The key takeaway is not that "Qoder uploads everything."
 
 The evidence supports a narrower conclusion:
 
-> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint and no duplicate hosted-model inference was observed. Qoder nevertheless maintained independent telemetry/control-plane data flows. A synchronized trace confirmed that one outbound AI-turn report contained a prefix derived directly from user prompt text; that specific reporter was later isolated and successfully neutralized without breaking BYOK. Separate product-specific tracking to Qoder's control plane remained active even with the editor telemetry level set to off.**
+> **In the tested BYOK configuration, custom-model inference was routed directly to the configured local endpoint and no duplicate hosted-model inference was observed. Qoder nevertheless maintained independent telemetry/control-plane data flows. A synchronized trace confirmed that one outbound AI-turn report contained a prefix derived directly from user prompt text; that reporter was later isolated and successfully neutralized without breaking BYOK. A second code-statistics sender was also neutralized preventively and the runtime remained functional. Separate turn-completion tracking to Qoder's control plane remained active even with the editor telemetry level set to off and included repository-identifying metadata such as `git_remote`.**
 
 That distinction matters for developers evaluating whether a BYOK coding workflow meets their organization's privacy requirements.
 
